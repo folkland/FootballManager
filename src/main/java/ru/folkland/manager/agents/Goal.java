@@ -1,5 +1,8 @@
-package ru.farhutdinovar.manager.agents;
+package ru.folkland.manager.agents;
 
+/**
+ * Это видимо класс для описания целей, типа Взобраться на Эверест
+ */
 public class Goal {
 
 	private int id;

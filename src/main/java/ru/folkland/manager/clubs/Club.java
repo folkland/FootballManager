@@ -1,9 +1,10 @@
-package ru.farhutdinovar.manager.clubs;
+package ru.folkland.manager.clubs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-import ru.farhutdinovar.manager.player.Player;
+import ru.folkland.manager.player.Player;
 
 public class Club {
 
@@ -175,6 +176,7 @@ public class Club {
 		this.name = name;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if(obj == this)
 			return true;
@@ -191,5 +193,10 @@ public class Club {
 			else
 				return false;
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 }

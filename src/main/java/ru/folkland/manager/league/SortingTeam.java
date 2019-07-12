@@ -1,4 +1,4 @@
-package ru.farhutdinovar.manager.league;
+package ru.folkland.manager.league;
 
 import java.util.Comparator;
 

@@ -1,5 +1,8 @@
-package ru.farhutdinovar.manager.agents;
+package ru.folkland.manager.agents;
 
+/**
+ * Думаю это бизнесы, которые можно выбрать для инвестиций
+ */
 public class Business {
 
 	private int id;

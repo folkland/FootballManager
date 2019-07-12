@@ -1,8 +1,8 @@
-package ru.farhutdinovar.manager.league;
+package ru.folkland.manager.league;
 
 import java.util.List;
 
-import ru.farhutdinovar.manager.clubs.Club;
+import ru.folkland.manager.clubs.Club;
 
 public class League {
 

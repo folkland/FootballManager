@@ -1,9 +1,9 @@
-package ru.farhutdinovar.manager.league;
+package ru.folkland.manager.league;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.farhutdinovar.manager.clubs.Club;
+import ru.folkland.manager.clubs.Club;
 
 /**
  * Создаем новый сезон играем игры и сохраняем результаты

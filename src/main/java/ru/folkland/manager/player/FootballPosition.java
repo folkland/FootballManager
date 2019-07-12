@@ -1,4 +1,4 @@
-package ru.farhutdinovar.manager.player;
+package ru.folkland.manager.player;
 
 /**
  * Position on football

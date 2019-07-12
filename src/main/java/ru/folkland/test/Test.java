@@ -1,10 +1,10 @@
-package ru.farhutdinovar.test;
+package ru.folkland.test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.farhutdinovar.manager.clubs.Club;
-import ru.farhutdinovar.manager.clubs.FootballScheme;
+import ru.folkland.manager.clubs.Club;
+import ru.folkland.manager.clubs.FootballScheme;
 
 public class Test {
 

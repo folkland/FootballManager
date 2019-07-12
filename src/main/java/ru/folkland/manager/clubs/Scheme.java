@@ -1,12 +1,17 @@
-package ru.farhutdinovar.manager.clubs;
+package ru.folkland.manager.clubs;
 
+/**
+ * Количество необходимых позиций для матча
+ *
+ * @author folkland
+ */
 public class Scheme {
 	private int forward;
 	private int midfielder;
 	private int defender;
 	
-	public Scheme (FootballScheme team) {
-		switch(team) {
+	public Scheme (FootballScheme scheme) {
+		switch(scheme) {
 		case s343: setForward(3); setMidfielder(4); setDefender(3); break;
 		case s352: setForward(2); setMidfielder(5); setDefender(3); break;
 		case s433: setForward(3); setMidfielder(3); setDefender(4); break;

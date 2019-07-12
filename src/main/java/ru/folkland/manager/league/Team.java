@@ -1,6 +1,6 @@
-package ru.farhutdinovar.manager.league;
+package ru.folkland.manager.league;
 
-import ru.farhutdinovar.manager.clubs.Club;
+import ru.folkland.manager.clubs.Club;
 /**
  * Описание элемента турнирной таблицы
  * @author Farhutdinov
