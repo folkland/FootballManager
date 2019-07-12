@@ -58,7 +58,7 @@ public class Club {
 		setForward(0);
 		for (Player player: toMatch) {
 			switch(player.getPosition()) {
-			case golkeeper: setGoalkeeper((int)player.getSkills()); break;
+			case goalkeeper: setGoalkeeper((int)player.getSkills()); break;
 			case defender: setDefender(getDefender() + (int)player.getSkills()); break;
 			case midfielder: setMidfielder(getMidfielder() + (int)player.getSkills()); break;
 			case forward: setForward(getForward() + (int)player.getSkills()); break;
@@ -75,7 +75,7 @@ public class Club {
 		List<Player> defenders = new ArrayList<Player>();
 		for (Player player: players) {
 			switch(player.getPosition()) {
-			case golkeeper: 
+			case goalkeeper:
 				if (toMatch.isEmpty()) {
 					toMatch.add(player);
 				} else if (toMatch.get(0).getSkills() < player.getSkills()) {
