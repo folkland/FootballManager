@@ -1,4 +1,4 @@
-package ru.folkland.manager.league;
+package ru.folkland.manager.clubs;
 
 import ru.folkland.manager.clubs.Club;
 /**

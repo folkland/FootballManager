@@ -1,30 +1,32 @@
-package ru.folkland.manager.league;
+package ru.folkland.manager.match;
 
 //счёт матча
 public class Total {
 	private int homeScore;
 	private int guestScore;
-	private int result;
-	
+	private Winner winner;
+
 	public int getHomeScore() {
 		return homeScore;
 	}
+
 	public void setHomeScore(int homeScore) {
 		this.homeScore = homeScore;
 	}
+
 	public int getGuestScore() {
 		return guestScore;
 	}
+
 	public void setGuestScore(int guestScore) {
 		this.guestScore = guestScore;
 	}
-	public int getResult() {
-		return result;
+
+	public Winner getWinner() {
+		return winner;
 	}
-	public void setResult(int result) {
-		this.result = result;
-	}
-	public String toString() {
-		return homeScore + ":" + guestScore;
+
+	public void setWinner(Winner winner) {
+		this.winner = winner;
 	}
 }

@@ -1,5 +1,6 @@
 package ru.folkland.manager.player;
 
+import ru.folkland.manager.constants.Constants;
 import ru.folkland.manager.model.Person;
 
 import java.security.SecureRandom;
@@ -38,8 +39,8 @@ public class Player extends Person implements Comparable {
 	 * @param isPlayInMatch участвовал ли игрок в матче, от этого зависит его прирост
 	 */
 	public void training(boolean isPlayInMatch) {
-		int traineMax = 30;
-		if (isPlayInMatch) traineMax = 100;
+		int traineMax = Constants.MAX_TRAIN_FOR_NOT_PLAYED_MATCH;
+		if (isPlayInMatch) traineMax = Constants.MAX_TRAIN_FOR_PLAYED_MATCH;
 		int growth = random.nextInt(traineMax);
 		skill = skill + (growth / 100);
 	}

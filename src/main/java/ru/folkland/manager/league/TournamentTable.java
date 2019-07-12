@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.folkland.manager.clubs.Club;
+import ru.folkland.manager.clubs.Team;
 
 /**
  * Турнирная таблица лиги

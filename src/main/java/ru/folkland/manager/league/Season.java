@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.folkland.manager.clubs.Club;
+import ru.folkland.manager.match.Match;
+import ru.folkland.manager.match.Total;
 
 /**
  * Создаем новый сезон играем игры и сохраняем результаты
