@@ -1,7 +1,11 @@
 package ru.folkland.manager.match;
 
-//счёт матча
+/**
+ * Результат матча
+ * @author folkland
+ */
 public class Total {
+
 	private int homeScore;
 	private int guestScore;
 	private Winner winner;

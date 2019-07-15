@@ -8,7 +8,6 @@ public class League {
 
 	private int id;
 	private String country;
-//	private int money;
 	
 	private List<Club> clubs;
 	

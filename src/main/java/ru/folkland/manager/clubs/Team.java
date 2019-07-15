@@ -1,18 +1,24 @@
 package ru.folkland.manager.clubs;
 
-import ru.folkland.manager.clubs.Club;
+import java.util.Objects;
+
 /**
  * Описание элемента турнирной таблицы
  * @author Farhutdinov
  *
  */
-public class Team {
+public class Team implements Comparable {
+
 	private Club club;
+
 	private int matchCount;
 	private int points;
 	private int victory;
 	private int draw;
 	private int lose;
+
+	private int scored;
+	private int missed;
 	
 	public Team(Club club) {
 		this.club = club;
@@ -34,7 +40,7 @@ public class Team {
 	//результаты матчей
 	public void win() {
 		matchCount++;
-		points = points+3;
+		points = points + 3;
 		victory++;
 	}
 	public void draw() {
@@ -86,7 +92,26 @@ public class Team {
 	
 	@Override
 	public String toString() {
-		String str = club.getName()+" "+matchCount+" | "+points+" | "+victory+" | "+draw+" | "+lose;
+		String str = club.getName()+" | "+matchCount+" | "+points+" | "+victory+" | "+draw+" | "+lose;
 		return str;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		Team team = (Team) o;
+		return points - team.points;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Team team = (Team) o;
+		return Objects.equals(club, team.club);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(club);
 	}
 }
