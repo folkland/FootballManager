@@ -25,6 +25,11 @@ public class TestSeason {
             club.setPlayers(players);
         }
         Season season = new Season(clubs);
+        season.playAllTours();
+        System.out.println(season.showTable());
+        for (Player player: clubs.get(1).getPlayers()) {
+            System.out.println(player.toString());
+        }
     }
 
     public static List<Player> createPlayers() {

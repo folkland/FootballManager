@@ -63,10 +63,13 @@ public class TournamentTable {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("№| Team name | MC | P | W | D | L\n");
+		str.append("  | Team name | MC | P | W | D | L\n");
 		int i = 1;
 		for (Team team: table) {
-			str.append(i + "| " + team.toString() + "\n");
+			str.append(i);
+			str.append("| ");
+			str.append(team.toString());
+			str.append("\n");
 			i++;
 		}
 		return str.toString();

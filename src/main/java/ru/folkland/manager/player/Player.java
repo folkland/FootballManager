@@ -20,18 +20,21 @@ public class Player extends Person implements Comparable {
 	private FootballPosition position;
 	//в каком клубе играет
 	private int club;
+	//status
+	private PlayerStatus status;
 	//средний показатель в сезоне
 	private double average;
 	//длина контракта
 	private int contract;
 	
-	public Player (int id, String name, String surname, int age, int skill, FootballPosition position/*, int character*/) {
+	public Player (int id, String name, String surname, int age, int skill, FootballPosition position) {
 		super(id, name, surname, age);
 		this.club = -1;
 		this.average = -1;
 		this.contract = -1;
 		this.skill = skill;
 		this.position = position;
+		status = PlayerStatus.newPlayer;
 	}
 
 	/**
@@ -41,8 +44,8 @@ public class Player extends Person implements Comparable {
 	public void training(boolean isPlayInMatch) {
 		int traineMax = Constants.MAX_TRAIN_FOR_NOT_PLAYED_MATCH;
 		if (isPlayInMatch) traineMax = Constants.MAX_TRAIN_FOR_PLAYED_MATCH;
-		int growth = random.nextInt(traineMax);
-		skill = skill + (growth / 100);
+		double growth = random.nextInt(traineMax) / 100;
+		skill = skill + growth;
 	}
 
 	public double getSkill() {
@@ -89,5 +92,20 @@ public class Player extends Person implements Comparable {
 	public int compareTo(Object o) {
 		Player player = (Player) o;
 		return (int) (getSkill() - player.getSkill());
+	}
+
+	@Override
+	public String toString() {
+		return "Player{" +
+				"name=" + getName() +
+				", surname=" + getSurname() +
+				", age=" + getAge() +
+				", skill=" + skill +
+				", position=" + position +
+				", club=" + club +
+				", status=" + status +
+				", average=" + average +
+				", contract=" + contract +
+				'}';
 	}
 }

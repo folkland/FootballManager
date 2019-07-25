@@ -20,13 +20,18 @@ public class SeasonShedule {
 
     private List<SeasonTour> seasonTourList;
 
+    //общее количество туров в чемпионате
     private int allTourCount;
+
+    //количество уже проведенных туров
+    private int pastTour;
 
     public SeasonShedule(TournamentTable tTable) {
         this.tTable = tTable;
         this.teams = tTable.getTable();
         seasonTourList = new ArrayList<>();
         allTourCount = teams.size() * 2 - 2;
+        pastTour = 0;
     }
 
     /**
@@ -77,14 +82,26 @@ public class SeasonShedule {
         seasonTourList.add(seasonTour);
     }
 
-    public void playFirstTour() {
-        SeasonTour seasonTour = seasonTourList.get(0);
+    /**
+     * Отигрываем следующий тур
+     */
+    public void playNextTour() throws IllegalArgumentException {
+        if (pastTour == allTourCount) throw new IllegalArgumentException("Season has no more tour");
+        SeasonTour seasonTour = seasonTourList.get(pastTour);
+        pastTour++;
         seasonTour.playTour();
         List<Match> matches = seasonTour.getMatches();
         Map<Match, Total> matchTotalMap = seasonTour.getTourResults();
         for (Match match: matches) {
             Total total = matchTotalMap.get(match);
             tTable.setPoints(match.getHome(), match.getGuest(), total.getWinner());
+            tTable.sortTable();
+        }
+    }
+
+    public void playAllTour() {
+        for (int i = 0; i < allTourCount; i++) {
+            playNextTour();
         }
     }
 

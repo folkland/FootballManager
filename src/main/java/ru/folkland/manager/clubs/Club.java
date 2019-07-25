@@ -43,6 +43,9 @@ public class Club {
 
 	public void setPlayers(List<Player> players) {
 		this.players = players;
+		for (Player player: this.players) {
+			player.setClub(id);
+		}
 	}
 
 	public String getName() {

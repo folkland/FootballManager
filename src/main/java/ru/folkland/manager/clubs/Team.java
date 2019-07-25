@@ -92,14 +92,13 @@ public class Team implements Comparable {
 	
 	@Override
 	public String toString() {
-		String str = club.getName()+" | "+matchCount+" | "+points+" | "+victory+" | "+draw+" | "+lose;
-		return str;
+		return club.getName()+" | "+matchCount+" | "+points+" | "+victory+" | "+draw+" | "+lose;
 	}
 
 	@Override
 	public int compareTo(Object o) {
 		Team team = (Team) o;
-		return points - team.points;
+		return team.points - points;
 	}
 
 	@Override
