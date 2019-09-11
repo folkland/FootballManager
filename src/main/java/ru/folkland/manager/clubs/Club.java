@@ -28,6 +28,7 @@ public class Club {
 		this.fScheme = fScheme;
 		scheme = new Scheme(fScheme);
 		this.setName(name);
+		players = new ArrayList<>();
 	}
 	
 	public int getId() {
@@ -46,6 +47,11 @@ public class Club {
 		for (Player player: this.players) {
 			player.setClub(id);
 		}
+	}
+
+	public void addPlayer(Player player) {
+		player.setClub(id);
+		players.add(player);
 	}
 
 	public String getName() {
@@ -75,5 +81,30 @@ public class Club {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append('[');
+		for (Player player: players) {
+			builder.append(player.toString());
+		}
+		builder.append(']');
+		return "Club{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", players=" + builder.toString() +
+				", fScheme=" + fScheme +
+				", scheme=" + scheme +
+				'}';
+	}
+
+	public int getTotalClubStreinght() {
+		int s = 0;
+		for (Player player: players) {
+			s += player.getSkill();
+		}
+		return s;
 	}
 }

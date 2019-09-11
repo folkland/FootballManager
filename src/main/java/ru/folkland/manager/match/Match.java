@@ -1,7 +1,7 @@
 package ru.folkland.manager.match;
 
 import ru.folkland.manager.clubs.Team;
-import ru.folkland.manager.constants.Constants;
+import ru.folkland.constants.Constants;
 
 import java.security.SecureRandom;
 

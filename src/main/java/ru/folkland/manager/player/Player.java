@@ -1,6 +1,6 @@
 package ru.folkland.manager.player;
 
-import ru.folkland.manager.constants.Constants;
+import ru.folkland.constants.Constants;
 import ru.folkland.manager.model.Person;
 
 import java.security.SecureRandom;

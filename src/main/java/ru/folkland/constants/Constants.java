@@ -1,6 +1,13 @@
-package ru.folkland.manager.constants;
+package ru.folkland.constants;
+
+import java.security.SecureRandom;
 
 public class Constants {
+
+    /**
+     * Randomizer constant
+     */
+    public static SecureRandom RANDOM = new SecureRandom();
 
     /**
      * Player class constants
