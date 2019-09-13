@@ -4,6 +4,7 @@ import ru.folkland.constants.Constants;
 import ru.folkland.manager.model.Person;
 
 import java.security.SecureRandom;
+import java.util.Objects;
 
 /**
  * POJO for football player
@@ -11,8 +12,6 @@ import java.security.SecureRandom;
  * @author folkland
  */
 public class Player extends Person implements Comparable {
-
-	private SecureRandom random = new SecureRandom();
 
 	//навык 0-100
 	private double skill;
@@ -44,7 +43,7 @@ public class Player extends Person implements Comparable {
 	public void training(boolean isPlayInMatch) {
 		int traineMax = Constants.MAX_TRAIN_FOR_NOT_PLAYED_MATCH;
 		if (isPlayInMatch) traineMax = Constants.MAX_TRAIN_FOR_PLAYED_MATCH;
-		double growth = random.nextInt(traineMax) / 100;
+		double growth = Constants.RANDOM.nextInt(traineMax) / 100;
 		skill = skill + growth;
 	}
 
@@ -88,10 +87,18 @@ public class Player extends Person implements Comparable {
 		this.contract = contract;
 	}
 
+	public PlayerStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(PlayerStatus status) {
+		this.status = status;
+	}
+
 	@Override
 	public int compareTo(Object o) {
 		Player player = (Player) o;
-		return (int) (getSkill() - player.getSkill());
+		return (int) (player.skill - skill);
 	}
 
 	@Override
@@ -107,5 +114,24 @@ public class Player extends Person implements Comparable {
 				", average=" + average +
 				", contract=" + contract +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		Player player = (Player) o;
+		return Double.compare(player.skill, skill) == 0 &&
+				club == player.club &&
+				Double.compare(player.average, average) == 0 &&
+				contract == player.contract &&
+				position == player.position &&
+				status == player.status;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), skill, position, club, status, average, contract);
 	}
 }

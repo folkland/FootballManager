@@ -52,6 +52,10 @@ public class Team implements Comparable {
 		matchCount++;
 		lose++;
 	}
+	public void scored(int scored, int missed) {
+		this.scored += scored;
+		this.missed += missed;
+	}
 	
 	public Club getClub() {
 		return club;
@@ -92,12 +96,18 @@ public class Team implements Comparable {
 	
 	@Override
 	public String toString() {
-		return club.getName()+" | "+matchCount+" | "+points+" | "+victory+" | "+draw+" | "+lose;
+		return club.getName()+" | "+matchCount+" | "+points+" | "+victory+" | "+draw+" | "+lose + " | " + scored + " | " + missed;
 	}
 
 	@Override
 	public int compareTo(Object o) {
 		Team team = (Team) o;
+		if (team.points == points) {
+			if (team.scored == scored) {
+				return missed - team.missed;
+			}
+			return team.scored - scored;
+		}
 		return team.points - points;
 	}
 

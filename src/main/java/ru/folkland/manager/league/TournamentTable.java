@@ -43,13 +43,15 @@ public class TournamentTable {
 	 * @param guest команда гостей
 	 * @param winner результат встречи
 	 */
-	public void setPoints(Team home, Team guest, Winner winner) {
+	public void setPoints(Team home, Team guest, Winner winner, int homeScored, int guestScored) {
 		switch(winner) {
 			case home: home.win(); guest.lose(); break;
 			case draw: home.draw(); guest.draw(); break;
 			case guest: home.lose(); guest.win(); break;
 			default: break;
 		}
+		home.scored(homeScored, guestScored);
+		guest.scored(guestScored, homeScored);
 	}
 	
 	public List<Team> getTable() {
@@ -63,7 +65,7 @@ public class TournamentTable {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("  | Team name | MC | P | W | D | L\n");
+		str.append("  | Team name | MC | P | W | D | L | S | M\n");
 		int i = 1;
 		for (Team team: table) {
 			str.append(i);

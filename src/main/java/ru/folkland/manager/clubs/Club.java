@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import ru.folkland.manager.player.FootballPosition;
 import ru.folkland.manager.player.Player;
+import ru.folkland.manager.player.PlayerStatus;
+import ru.folkland.manager.transfer.TransferList;
 
 /**
  * Класс описывающий Клуб как организацию
@@ -43,14 +46,14 @@ public class Club {
 	}
 
 	public void setPlayers(List<Player> players) {
-		this.players = players;
-		for (Player player: this.players) {
-			player.setClub(id);
+		for (Player player: players) {
+			addPlayer(player);
 		}
 	}
 
 	public void addPlayer(Player player) {
 		player.setClub(id);
+		player.setStatus(PlayerStatus.inClub);
 		players.add(player);
 	}
 
@@ -68,6 +71,38 @@ public class Club {
 
 	public void setScheme(Scheme scheme) {
 		this.scheme = scheme;
+	}
+
+	public void compositionFormation(TransferList transferList) {
+		transferList.needMorePlayers(20);
+		List<Player> goalKeepers = transferList.getPlayerForPosition(FootballPosition.goalkeeper);
+		while (goalKeepers.size() < 2) {
+			transferList.needMorePlayers(5);
+			goalKeepers = transferList.getPlayerForPosition(FootballPosition.goalkeeper);
+		}
+		transferList.choosedPlayers(goalKeepers.subList(0,2));
+		setPlayers(goalKeepers.subList(0,2));
+		List<Player> defenders = transferList.getPlayerForPosition(FootballPosition.defender);
+		while (defenders.size() < scheme.getDefender() * 2) {
+			transferList.needMorePlayers(5);
+			defenders = transferList.getPlayerForPosition(FootballPosition.defender);
+		}
+		transferList.choosedPlayers(defenders.subList(0,scheme.getDefender() * 2));
+		setPlayers(defenders.subList(0,scheme.getDefender() * 2));
+		List<Player> midfielders = transferList.getPlayerForPosition(FootballPosition.midfielder);
+		while (midfielders.size() < scheme.getMidfielder() * 2) {
+			transferList.needMorePlayers(5);
+			midfielders = transferList.getPlayerForPosition(FootballPosition.midfielder);
+		}
+		transferList.choosedPlayers(midfielders.subList(0,scheme.getMidfielder() * 2));
+		setPlayers(midfielders.subList(0,scheme.getMidfielder() * 2));
+		List<Player> forwards = transferList.getPlayerForPosition(FootballPosition.forward);
+		while (forwards.size() < scheme.getForward() * 2) {
+			transferList.needMorePlayers(5);
+			forwards = transferList.getPlayerForPosition(FootballPosition.forward);
+		}
+		transferList.choosedPlayers(forwards.subList(0,scheme.getForward() * 2));
+		setPlayers(forwards.subList(0,scheme.getForward() * 2));
 	}
 
 	@Override
@@ -96,7 +131,6 @@ public class Club {
 				", name='" + name + '\'' +
 				", players=" + builder.toString() +
 				", fScheme=" + fScheme +
-				", scheme=" + scheme +
 				'}';
 	}
 

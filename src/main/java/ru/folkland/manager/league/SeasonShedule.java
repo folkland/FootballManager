@@ -94,7 +94,7 @@ public class SeasonShedule {
         Map<Match, Total> matchTotalMap = seasonTour.getTourResults();
         for (Match match: matches) {
             Total total = matchTotalMap.get(match);
-            tTable.setPoints(match.getHome(), match.getGuest(), total.getWinner());
+            tTable.setPoints(match.getHome(), match.getGuest(), total.getWinner(), total.getHomeScore(), total.getGuestScore());
             tTable.sortTable();
         }
     }

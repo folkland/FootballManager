@@ -7,8 +7,6 @@ import java.security.SecureRandom;
 
 public class Match {
 
-	private SecureRandom random = new SecureRandom();
-
 	private Team home;
 	private Team guest;
 
@@ -42,9 +40,9 @@ public class Match {
 	private Total totalScore() {
 		Total total = new Total();
 		int minimumCanScored = 0, maximumCanScored = 1;
-		int homeChance = random.nextInt(homeStrength);
-		int guestChance = random.nextInt(guestStrength);
-		int maxWinnerTeamScored = maximumCanScored + random.nextInt(Constants.MAX_GAME_SCORED_COUNT);
+		int homeChance = Constants.RANDOM.nextInt(homeStrength);
+		int guestChance = Constants.RANDOM.nextInt(guestStrength);
+		int maxWinnerTeamScored = maximumCanScored + Constants.RANDOM.nextInt(Constants.MAX_GAME_SCORED_COUNT);
 		if (draw(homeChance, guestChance)) {
 			int sc = scored(Constants.MAX_DRAW_SCORED_COUNT, minimumCanScored);
 			total.setGuestScore(sc);
@@ -71,7 +69,7 @@ public class Match {
 	 * @return количество забитых
 	 */
 	private int scored(int max, int min) {
-		return min + random.nextInt(max);
+		return min + Constants.RANDOM.nextInt(max);
 	}
 
 	/**
