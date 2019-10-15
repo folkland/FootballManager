@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div th:include="common/__menu" />
+<!--/*@thymesVar id="player" type="ru.folkland.manager.player.Player"*/-->
+Player name: <span th:text="${player.name}"></span><br>
+Player surname: <span th:text="${player.surname}"></span><br>
+Player age: <span th:text="${player.age}"/><br>
+Stats:
+<ul>
+    <li>Skill: <span th:text="${player.skill}"/> </li>
+    <li>Position: <span th:text="${player.position}"/> </li>
+    <li>Status: <span th:text="${player.status}"/> </li>
+</ul>
+</body>
+</html>
