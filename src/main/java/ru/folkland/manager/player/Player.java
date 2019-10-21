@@ -25,7 +25,7 @@ public class Player extends Person implements Comparable {
 	private double average;
 	//длина контракта
 	private int contract;
-	
+
 	public Player (int id, String name, String surname, int age, int skill, FootballPosition position) {
 		super(id, name, surname, age);
 		this.club = -1;
