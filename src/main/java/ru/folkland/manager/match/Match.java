@@ -1,19 +1,17 @@
 package ru.folkland.manager.match;
 
-import ru.folkland.manager.clubs.Team;
+import ru.folkland.manager.clubs.Club;
 import ru.folkland.constants.Constants;
-
-import java.security.SecureRandom;
 
 public class Match {
 
-	private Team home;
-	private Team guest;
+	private Club home;
+	private Club guest;
 
 	private int homeStrength;
 	private int guestStrength;
 	
-	public Match (Team home, Team guest) {
+	public Match (Club home, Club guest) {
 		this.home = home;
 		this.guest = guest;
 	}
@@ -23,8 +21,8 @@ public class Match {
 	 * @return счёт в матче
 	 */
 	public Total playMatch () {
-		TeamMainCast homeSquad = new TeamMainCast(home.getClub());
-		TeamMainCast guestSquad = new TeamMainCast(guest.getClub());
+		TeamMainCast homeSquad = new TeamMainCast(home.getTeam());
+		TeamMainCast guestSquad = new TeamMainCast(guest.getTeam());
 		homeStrength = homeSquad.playerStrength() + Constants.HOME_CLUB_BONUS_TO_STRENGTH;
 		guestStrength = guestSquad.playerStrength();
 		Total total = totalScore();
@@ -86,16 +84,16 @@ public class Match {
 		return false;
 	}
 
-	public Team getHome() {
+	public Club getHome() {
 		return home;
 	}
 
-	public Team getGuest() {
+	public Club getGuest() {
 		return guest;
 	}
 
 	@Override
 	public String toString() {
-		return home.getClub().getName() + " : " + guest.getClub().getName();
+		return home.getTeam().getName() + " : " + guest.getTeam().getName();
 	}
 }

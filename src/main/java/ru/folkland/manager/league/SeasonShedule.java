@@ -1,6 +1,6 @@
 package ru.folkland.manager.league;
 
-import ru.folkland.manager.clubs.Team;
+import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.match.Match;
 import ru.folkland.manager.match.Total;
 
@@ -16,7 +16,7 @@ public class SeasonShedule {
 
     private TournamentTable tTable;
 
-    private List<Team> teams;
+    private List<Club> clubs;
 
     private List<SeasonTour> seasonTourList;
 
@@ -28,9 +28,9 @@ public class SeasonShedule {
 
     public SeasonShedule(TournamentTable tTable) {
         this.tTable = tTable;
-        this.teams = tTable.getTable();
+        this.clubs = tTable.getTable();
         seasonTourList = new ArrayList<>();
-        allTourCount = teams.size() * 2 - 2;
+        allTourCount = clubs.size() * 2 - 2;
         pastTour = 0;
     }
 
@@ -38,7 +38,7 @@ public class SeasonShedule {
      * Генерируем расписание для каждого тура сезона
      */
     public void generateShedule() {
-        int middleSeason = teams.size() - 1;
+        int middleSeason = clubs.size() - 1;
         for (int i = 0; i < allTourCount; i++) {
             boolean ring = true;
             int tourCount = i;
@@ -57,23 +57,23 @@ public class SeasonShedule {
      */
     private void searchPair(boolean ring, int tourCount) {
         SeasonTour seasonTour = new SeasonTour();
-        List<Team> usedTeams = new ArrayList<>();
-        for (int i = 0; i < teams.size() && usedTeams.size() != teams.size(); i++) {
-            Team team1 = teams.get(i);
-            if (!usedTeams.contains(team1)) {
+        List<Club> usedClubs = new ArrayList<>();
+        for (int i = 0; i < clubs.size() && usedClubs.size() != clubs.size(); i++) {
+            Club club1 = clubs.get(i);
+            if (!usedClubs.contains(club1)) {
                 boolean b = true;
                 int j = i + 1 + tourCount;
                 while (b) {
-                    if (j == 0) j = teams.size() - 1;
-                    if (j >= teams.size()) j = j - teams.size();
-                    Team team2 = teams.get(teams.size() - j);
+                    if (j == 0) j = clubs.size() - 1;
+                    if (j >= clubs.size()) j = j - clubs.size();
+                    Club club2 = clubs.get(clubs.size() - j);
                     j--;
-                    if (!team1.equals(team2) && !usedTeams.contains(team2)) {
-                        usedTeams.add(team1);
-                        usedTeams.add(team2);
+                    if (!club1.equals(club2) && !usedClubs.contains(club2)) {
+                        usedClubs.add(club1);
+                        usedClubs.add(club2);
                         if (ring) {
-                            seasonTour.addMatch(team1, team2);
-                        } else seasonTour.addMatch(team2, team1);
+                            seasonTour.addMatch(club1, club2);
+                        } else seasonTour.addMatch(club2, club1);
                         b = false;
                     }
                 }

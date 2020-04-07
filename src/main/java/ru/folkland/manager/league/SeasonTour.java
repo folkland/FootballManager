@@ -1,6 +1,6 @@
 package ru.folkland.manager.league;
 
-import ru.folkland.manager.clubs.Team;
+import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.match.Match;
 import ru.folkland.manager.match.Total;
 
@@ -24,7 +24,7 @@ public class SeasonTour {
         matches = new ArrayList<>();
     }
 
-    public void addMatch(Team home, Team guest) {
+    public void addMatch(Club home, Club guest) {
         matches.add(new Match(home, guest));
     }
 

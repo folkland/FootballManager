@@ -1,5 +1,9 @@
 package ru.folkland.manager.player;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import ru.folkland.constants.Constants;
 import ru.folkland.manager.model.Person;
 
@@ -11,6 +15,9 @@ import java.util.Objects;
  *
  * @author folkland
  */
+@Getter
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class Player extends Person implements Comparable {
 
 	//навык 0-100
@@ -26,11 +33,9 @@ public class Player extends Person implements Comparable {
 	//длина контракта
 	private int contract;
 
-	public Player (int id, String name, String surname, int age, int skill, FootballPosition position) {
-		super(id, name, surname, age);
+	public Player (String name, String surname, int age, int skill, FootballPosition position) {
+		super(name, surname, age);
 		this.club = -1;
-		this.average = -1;
-		this.contract = -1;
 		this.skill = skill;
 		this.position = position;
 		status = PlayerStatus.newPlayer;
@@ -47,48 +52,12 @@ public class Player extends Person implements Comparable {
 		skill = skill + growth;
 	}
 
-	public double getSkill() {
-		return skill;
-	}
-
-	public void setSkill(double skill) {
-		this.skill = skill;
-	}
-
-	public FootballPosition getPosition() {
-		return position;
-	}
-
-	public void setPosition(FootballPosition position) {
-		this.position = position;
-	}
-
-	public int getClub() {
-		return club;
-	}
-
 	public void setClub(int club) {
 		this.club = club;
 	}
 
-	public double getAverage() {
-		return average;
-	}
-
-	public void setAverage(double average) {
-		this.average = average;
-	}
-
-	public int getContract() {
-		return contract;
-	}
-
 	public void setContract(int contract) {
 		this.contract = contract;
-	}
-
-	public PlayerStatus getStatus() {
-		return status;
 	}
 
 	public void setStatus(PlayerStatus status) {
@@ -99,39 +68,5 @@ public class Player extends Person implements Comparable {
 	public int compareTo(Object o) {
 		Player player = (Player) o;
 		return (int) (player.skill - skill);
-	}
-
-	@Override
-	public String toString() {
-		return "Player{" +
-				"name=" + getName() +
-				", surname=" + getSurname() +
-				", age=" + getAge() +
-				", skill=" + skill +
-				", position=" + position +
-				", club=" + club +
-				", status=" + status +
-				", average=" + average +
-				", contract=" + contract +
-				'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
-		Player player = (Player) o;
-		return Double.compare(player.skill, skill) == 0 &&
-				club == player.club &&
-				Double.compare(player.average, average) == 0 &&
-				contract == player.contract &&
-				position == player.position &&
-				status == player.status;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), skill, position, club, status, average, contract);
 	}
 }

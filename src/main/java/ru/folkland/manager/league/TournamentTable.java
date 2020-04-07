@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.clubs.Team;
+import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.match.Winner;
 
 /**
@@ -15,20 +15,20 @@ import ru.folkland.manager.match.Winner;
  */
 public class TournamentTable {
 
-	private List<Team> table;
+	private List<Club> table;
 	
-	public TournamentTable(List<Club> clubs) {
+	public TournamentTable(List<Team> teams) {
 		table = new ArrayList<>();
-		for (Club club: clubs) {
-			Team team = new Team(club);
-			table.add(team);
+		for (Team team : teams) {
+			Club club = new Club(team);
+			table.add(club);
 		}
 	}
 
 	//очищаем результаты в начале сезона
 	public void clearTournament() {
-		for (Team team: table) {
-			team.clearStats();
+		for (Club club : table) {
+			club.clearStats();
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class TournamentTable {
 	 * @param guest команда гостей
 	 * @param winner результат встречи
 	 */
-	public void setPoints(Team home, Team guest, Winner winner, int homeScored, int guestScored) {
+	public void setPoints(Club home, Club guest, Winner winner, int homeScored, int guestScored) {
 		switch(winner) {
 			case home: home.win(); guest.lose(); break;
 			case draw: home.draw(); guest.draw(); break;
@@ -54,23 +54,23 @@ public class TournamentTable {
 		guest.scored(guestScored, homeScored);
 	}
 	
-	public List<Team> getTable() {
+	public List<Club> getTable() {
 		return table;
 	}
 
-	public void setTable(List<Team> table) {
+	public void setTable(List<Club> table) {
 		this.table = table;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("  | Team name | MC | P | W | D | L | S | M\n");
+		str.append(" | Team name | MC | P | W | D | L | S | M\n");
 		int i = 1;
-		for (Team team: table) {
+		for (Club club : table) {
 			str.append(i);
 			str.append("| ");
-			str.append(team.toString());
+			str.append(club.toString());
 			str.append("\n");
 			i++;
 		}
