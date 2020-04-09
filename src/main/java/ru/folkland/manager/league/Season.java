@@ -2,7 +2,7 @@ package ru.folkland.manager.league;
 
 import java.util.List;
 
-import ru.folkland.manager.clubs.Team;
+import ru.folkland.manager.clubs.Club;
 
 /**
  * Создаем новый сезон играем игры и сохраняем результаты
@@ -12,12 +12,12 @@ import ru.folkland.manager.clubs.Team;
 public class Season {
 
 	private TournamentTable tTable;
-	private SeasonShedule shedule;
+	private SeasonSchedule shedule;
 
-	public Season(List<Team> teams) {
-		tTable = new TournamentTable(teams);
-		shedule = new SeasonShedule(tTable);
-		shedule.generateShedule();
+	public Season(List<Club> clubs) {
+		tTable = new TournamentTable(clubs);
+		shedule = new SeasonSchedule(tTable);
+		shedule.generateSchedule();
 	}
 
 	public void playNextTour() {

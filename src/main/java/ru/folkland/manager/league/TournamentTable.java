@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ru.folkland.manager.clubs.Team;
 import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.match.Winner;
 
@@ -15,25 +14,25 @@ import ru.folkland.manager.match.Winner;
  */
 public class TournamentTable {
 
-	private List<Club> table;
+	private List<TeamSeason> table;
 	
-	public TournamentTable(List<Team> teams) {
+	TournamentTable(List<Club> clubs) {
 		table = new ArrayList<>();
-		for (Team team : teams) {
-			Club club = new Club(team);
-			table.add(club);
+		for (Club club : clubs) {
+			TeamSeason teamSeason = new TeamSeason(club);
+			table.add(teamSeason);
 		}
 	}
 
 	//очищаем результаты в начале сезона
-	public void clearTournament() {
-		for (Club club : table) {
-			club.clearStats();
+	void clearTournament() {
+		for (TeamSeason teamSeason : table) {
+			teamSeason.clearStats();
 		}
 	}
 	
 	//сортируем клубы после каждого тура
-	public void sortTable() {
+	void sortTable() {
 		Collections.sort(table);
 	}
 
@@ -43,7 +42,7 @@ public class TournamentTable {
 	 * @param guest команда гостей
 	 * @param winner результат встречи
 	 */
-	public void setPoints(Club home, Club guest, Winner winner, int homeScored, int guestScored) {
+	void setPoints(TeamSeason home, TeamSeason guest, Winner winner, int homeScored, int guestScored) {
 		switch(winner) {
 			case home: home.win(); guest.lose(); break;
 			case draw: home.draw(); guest.draw(); break;
@@ -54,11 +53,11 @@ public class TournamentTable {
 		guest.scored(guestScored, homeScored);
 	}
 	
-	public List<Club> getTable() {
+	List<TeamSeason> getTable() {
 		return table;
 	}
 
-	public void setTable(List<Club> table) {
+	void setTable(List<TeamSeason> table) {
 		this.table = table;
 	}
 
@@ -67,10 +66,10 @@ public class TournamentTable {
 		StringBuilder str = new StringBuilder();
 		str.append(" | Team name | MC | P | W | D | L | S | M\n");
 		int i = 1;
-		for (Club club : table) {
+		for (TeamSeason teamSeason : table) {
 			str.append(i);
 			str.append("| ");
-			str.append(club.toString());
+			str.append(teamSeason.toString());
 			str.append("\n");
 			i++;
 		}

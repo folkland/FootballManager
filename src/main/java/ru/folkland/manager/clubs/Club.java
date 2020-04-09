@@ -2,78 +2,77 @@ package ru.folkland.manager.clubs;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
+import ru.folkland.manager.player.FootballPosition;
+import ru.folkland.manager.player.Player;
+import ru.folkland.manager.player.PlayerStatus;
+import ru.folkland.manager.transfer.PlayerCost;
+import ru.folkland.manager.transfer.TransferList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Описание элемента турнирной таблицы
- * @author Farhutdinov
- *
+ * Класс описывающий Клуб как организацию
  */
 @Getter
 @EqualsAndHashCode
-public class Club implements Comparable {
+@ToString(of = {"id", "name", "players", "fScheme"})
+public class Club {
 
-	private Team team;
+	private static int team_counter = 0;
 
-	private int matchCount;
-	private int points;
-	private int victory;
-	private int draw;
-	private int lose;
+	private int id;
+	//название каманды
+	private String name;
 
-	private int scored;
-	private int missed;
+	//список игроков
+	private List<Player> players;
 	
-	public Club(Team team) {
-		this.team = team;
-		matchCount = 0;
-		points = 0;
-		victory = 0;
-		draw = 0;
-		lose = 0;
-	}
-	
-	//очитска статистики клуба в начале сезона
-	public void clearStats() {
-		matchCount = 0;
-		points = 0;
-		victory = 0;
-		draw = 0;
-		lose = 0;
-	}
-	//результаты матчей
-	public void win() {
-		matchCount++;
-		points = points + 3;
-		victory++;
-	}
-	public void draw() {
-		matchCount++;
-		points++;
-		draw++;
-	}
-	public void lose() {
-		matchCount++;
-		lose++;
-	}
-	public void scored(int scored, int missed) {
-		this.scored += scored;
-		this.missed += missed;
-	}
-	
-	@Override
-	public String toString() {
-		return team.getName()+" | "+matchCount+" | "+points+" | "+victory+" | "+draw+" | "+lose + " | " + scored + " | " + missed;
+	//расстановка клуба
+	private FootballScheme fScheme;
+	//схема по которой играет команда
+	private Scheme scheme;
+
+	public Club(String name, FootballScheme fScheme) {
+		id = team_counter;
+		this.fScheme = fScheme;
+		scheme = new Scheme(fScheme);
+		this.name = name;
+		players = new ArrayList<>();
+		team_counter++;
 	}
 
-	@Override
-	public int compareTo(Object o) {
-		Club club = (Club) o;
-		if (club.points == points) {
-			if (club.scored == scored) {
-				return missed - club.missed;
-			}
-			return club.scored - scored;
+	public void addPlayer(Player player) {
+		player.setClub(id);
+		player.setStatus(PlayerStatus.inClub);
+		players.add(player);
+	}
+
+	private void addPlayers(List<PlayerCost> playerCosts) {
+		playerCosts.forEach(playerCost -> addPlayer(playerCost.getPlayer()));
+	}
+
+	public void compositionFormation(TransferList transferList) {
+		transferList.needMorePlayers(20);
+		composePosition(transferList, FootballPosition.goalkeeper, 1);
+		composePosition(transferList, FootballPosition.defender, scheme.getDefender());
+		composePosition(transferList, FootballPosition.midfielder, scheme.getMidfielder());
+		composePosition(transferList, FootballPosition.forward, scheme.getForward());
+	}
+
+	private void composePosition(TransferList transferList, FootballPosition position, int needPlayerCount) {
+		needPlayerCount = needPlayerCount * 2;
+		List<PlayerCost> forPosition = transferList.getPlayerForPosition(position);
+		while (forPosition.size() < needPlayerCount) {
+			transferList.needMorePlayers(5);
+			forPosition = transferList.getPlayerForPosition(position);
 		}
-		return club.points - points;
+		transferList.choosedPlayers(forPosition.subList(0, needPlayerCount));
+		addPlayers(forPosition.subList(0, needPlayerCount));
+	}
+
+	public int getTotalClubStreinght() {
+		return (int) players.stream().mapToDouble(Player::getSkill).sum();
 	}
 }

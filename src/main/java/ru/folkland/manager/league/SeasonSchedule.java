@@ -1,6 +1,5 @@
 package ru.folkland.manager.league;
 
-import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.match.Match;
 import ru.folkland.manager.match.Total;
 
@@ -12,11 +11,11 @@ import java.util.Map;
  * Расписание матчей сезона
  * @author folkland
  */
-public class SeasonShedule {
+public class SeasonSchedule {
 
     private TournamentTable tTable;
 
-    private List<Club> clubs;
+    private List<TeamSeason> teamSeasons;
 
     private List<SeasonTour> seasonTourList;
 
@@ -26,19 +25,19 @@ public class SeasonShedule {
     //количество уже проведенных туров
     private int pastTour;
 
-    public SeasonShedule(TournamentTable tTable) {
+    SeasonSchedule(TournamentTable tTable) {
         this.tTable = tTable;
-        this.clubs = tTable.getTable();
+        this.teamSeasons = tTable.getTable();
         seasonTourList = new ArrayList<>();
-        allTourCount = clubs.size() * 2 - 2;
+        allTourCount = teamSeasons.size() * 2 - 2;
         pastTour = 0;
     }
 
     /**
      * Генерируем расписание для каждого тура сезона
      */
-    public void generateShedule() {
-        int middleSeason = clubs.size() - 1;
+    void generateSchedule() {
+        int middleSeason = teamSeasons.size() - 1;
         for (int i = 0; i < allTourCount; i++) {
             boolean ring = true;
             int tourCount = i;
@@ -57,23 +56,23 @@ public class SeasonShedule {
      */
     private void searchPair(boolean ring, int tourCount) {
         SeasonTour seasonTour = new SeasonTour();
-        List<Club> usedClubs = new ArrayList<>();
-        for (int i = 0; i < clubs.size() && usedClubs.size() != clubs.size(); i++) {
-            Club club1 = clubs.get(i);
-            if (!usedClubs.contains(club1)) {
+        List<TeamSeason> usedTeamSeasons = new ArrayList<>();
+        for (int i = 0; i < teamSeasons.size() && usedTeamSeasons.size() != teamSeasons.size(); i++) {
+            TeamSeason teamSeason1 = teamSeasons.get(i);
+            if (!usedTeamSeasons.contains(teamSeason1)) {
                 boolean b = true;
                 int j = i + 1 + tourCount;
                 while (b) {
-                    if (j == 0) j = clubs.size() - 1;
-                    if (j >= clubs.size()) j = j - clubs.size();
-                    Club club2 = clubs.get(clubs.size() - j);
+                    if (j == 0) j = teamSeasons.size() - 1;
+                    if (j >= teamSeasons.size()) j = j - teamSeasons.size();
+                    TeamSeason teamSeason2 = teamSeasons.get(teamSeasons.size() - j);
                     j--;
-                    if (!club1.equals(club2) && !usedClubs.contains(club2)) {
-                        usedClubs.add(club1);
-                        usedClubs.add(club2);
+                    if (!teamSeason1.equals(teamSeason2) && !usedTeamSeasons.contains(teamSeason2)) {
+                        usedTeamSeasons.add(teamSeason1);
+                        usedTeamSeasons.add(teamSeason2);
                         if (ring) {
-                            seasonTour.addMatch(club1, club2);
-                        } else seasonTour.addMatch(club2, club1);
+                            seasonTour.addMatch(teamSeason1, teamSeason2);
+                        } else seasonTour.addMatch(teamSeason2, teamSeason1);
                         b = false;
                     }
                 }
@@ -85,7 +84,7 @@ public class SeasonShedule {
     /**
      * Отигрываем следующий тур
      */
-    public void playNextTour() throws IllegalArgumentException {
+    void playNextTour() throws IllegalArgumentException {
         if (pastTour == allTourCount) throw new IllegalArgumentException("Season has no more tour");
         SeasonTour seasonTour = seasonTourList.get(pastTour);
         pastTour++;
@@ -99,7 +98,7 @@ public class SeasonShedule {
         }
     }
 
-    public void playAllTour() {
+    void playAllTour() {
         for (int i = 0; i < allTourCount; i++) {
             playNextTour();
         }
@@ -109,8 +108,11 @@ public class SeasonShedule {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < seasonTourList.size(); i++) {
-            stringBuilder.append("Tour " + (i+1) + '\n');
-            stringBuilder.append(seasonTourList.get(i).toString() + '\n');
+            stringBuilder.append("Tour ");
+            stringBuilder.append(i+1);
+            stringBuilder.append('\n');
+            stringBuilder.append(seasonTourList.get(i).toString());
+            stringBuilder.append('\n');
         }
         return stringBuilder.toString();
     }

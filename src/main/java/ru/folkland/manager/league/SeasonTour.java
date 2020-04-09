@@ -1,6 +1,5 @@
 package ru.folkland.manager.league;
 
-import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.match.Match;
 import ru.folkland.manager.match.Total;
 
@@ -19,16 +18,16 @@ public class SeasonTour {
 
     private Map<Match, Total> tourResults;
 
-    public SeasonTour() {
+    SeasonTour() {
         tourResults = new HashMap<>();
         matches = new ArrayList<>();
     }
 
-    public void addMatch(Club home, Club guest) {
+    void addMatch(TeamSeason home, TeamSeason guest) {
         matches.add(new Match(home, guest));
     }
 
-    public void playTour() {
+    void playTour() {
         for(Match match: matches) {
             playMatch(match);
         }
@@ -38,11 +37,11 @@ public class SeasonTour {
         tourResults.put(match, match.playMatch());
     }
 
-    public Map<Match, Total> getTourResults() {
+    Map<Match, Total> getTourResults() {
         return tourResults;
     }
 
-    public List<Match> getMatches() {
+    List<Match> getMatches() {
         return matches;
     }
 
@@ -50,7 +49,8 @@ public class SeasonTour {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Match match: matches) {
-            stringBuilder.append(match.toString() + '\n');
+            stringBuilder.append(match.toString());
+            stringBuilder.append('\n');
         }
         return stringBuilder.toString();
     }

@@ -1,6 +1,6 @@
 package ru.folkland.manager.match;
 
-import ru.folkland.manager.clubs.Team;
+import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.player.Player;
 
 import java.util.ArrayList;
@@ -12,9 +12,9 @@ import java.util.List;
  *
  * @author folkland
  */
-public class TeamMainCast {
+class TeamMainCast {
 
-    private Team team;
+    private Club club;
 
     //список игроков на матч
     private List<Player> toMatch;
@@ -25,8 +25,8 @@ public class TeamMainCast {
     private int strengthMidfielder;
     private int strengthGoalkeeper;
 
-    TeamMainCast(Team team) {
-        this.team = team;
+    TeamMainCast(Club club) {
+        this.club = club;
         strengthGoalkeeper = 0;
         strengthDefender = 0;
         strengthMidfielder = 0;
@@ -37,7 +37,7 @@ public class TeamMainCast {
      * Выясняем силу стартового состава на матч
      * @return сила стартового состава
      */
-    public int playerStrength() {
+    int playerStrength() {
         choosePlayer();
         for (Player player: toMatch) {
             switch(player.getPosition()) {
@@ -58,7 +58,7 @@ public class TeamMainCast {
         List<Player> forwards = new ArrayList<>();
         List<Player> midfielders = new ArrayList<>();
         List<Player> defenders = new ArrayList<>();
-        for (Player player: team.getPlayers()) {
+        for (Player player: club.getPlayers()) {
             switch(player.getPosition()) {
                 case goalkeeper:
                     if (toMatch.isEmpty()) {
@@ -77,13 +77,13 @@ public class TeamMainCast {
         Collections.sort(defenders);
         Collections.sort(midfielders);
         Collections.sort(forwards);
-        for (int i = 0; i < team.getScheme().getForward(); i++) {
+        for (int i = 0; i < club.getScheme().getForward(); i++) {
             toMatch.add(forwards.get(i));
         }
-        for (int i = 0; i < team.getScheme().getMidfielder(); i++) {
+        for (int i = 0; i < club.getScheme().getMidfielder(); i++) {
             toMatch.add(midfielders.get(i));
         }
-        for (int i = 0; i < team.getScheme().getDefender(); i++) {
+        for (int i = 0; i < club.getScheme().getDefender(); i++) {
             toMatch.add(defenders.get(i));
         }
     }
@@ -91,8 +91,8 @@ public class TeamMainCast {
     /**
      * Тренируем всех игроков в зависимости от их вклада в игру
      */
-    public void training() {
-        for (Player player: team.getPlayers()) {
+    void training() {
+        for (Player player: club.getPlayers()) {
             boolean isMatchPlay = toMatch.contains(player);
             player.training(isMatchPlay);
         }

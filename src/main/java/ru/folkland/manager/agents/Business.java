@@ -1,8 +1,11 @@
 package ru.folkland.manager.agents;
 
+import lombok.Getter;
+
 /**
  * Думаю это бизнесы, которые можно выбрать для инвестиций
  */
+@Getter
 public class Business {
 
 	private int id;
@@ -18,38 +21,5 @@ public class Business {
 		this.type = type;
 		this.cost = cost;
 		this.incoming = incoming;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public int getCost() {
-		return cost;
-	}
-	public void setCost(int cost) {
-		this.cost = cost;
-	}
-	public int getIncoming() {
-		return incoming;
-	}
-	public void setIncoming(int incoming) {
-		this.incoming = incoming;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 }

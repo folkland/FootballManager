@@ -18,7 +18,7 @@ import java.util.Objects;
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class Player extends Person implements Comparable {
+public class Player extends Person implements Comparable<Player> {
 
 	//навык 0-100
 	private double skill;
@@ -65,8 +65,7 @@ public class Player extends Person implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		Player player = (Player) o;
+	public int compareTo(Player player) {
 		return (int) (player.skill - skill);
 	}
 }

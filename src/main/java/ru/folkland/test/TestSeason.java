@@ -1,7 +1,7 @@
 package ru.folkland.test;
 
-import ru.folkland.generate.GenerateTeam;
-import ru.folkland.manager.clubs.Team;
+import ru.folkland.generate.GenerateClub;
+import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.league.Season;
 import ru.folkland.manager.player.Player;
 import ru.folkland.manager.transfer.TransferList;
@@ -15,32 +15,32 @@ import java.util.List;
 public class TestSeason {
 
     public static void main(String[] args) {
-        List<Team> teams = new ArrayList<>();
+        List<Club> clubs = new ArrayList<>();
         TransferList transferList = new TransferList(100);
-        teams.add(GenerateTeam.createClubWithTransfer(transferList));
-        teams.add(GenerateTeam.createClubWithTransfer(transferList));
-        teams.add(GenerateTeam.createClubWithTransfer(transferList));
-        teams.add(GenerateTeam.createClubWithTransfer(transferList));
-        Season season = new Season(teams);
+        clubs.add(GenerateClub.createClubWithTransfer(transferList));
+        clubs.add(GenerateClub.createClubWithTransfer(transferList));
+        clubs.add(GenerateClub.createClubWithTransfer(transferList));
+        clubs.add(GenerateClub.createClubWithTransfer(transferList));
+        Season season = new Season(clubs);
         season.playAllTours();
         System.out.println(season.showTable());
-        for (Team team : teams) {
-            System.out.println(team.getName() + " " + team.getTotalClubStreinght());
+        for (Club club : clubs) {
+            System.out.println(club.getName() + " " + club.getTotalClubStreinght());
         }
         System.out.println("==============");
-        for (Player player: teams.get(0).getPlayers()) {
+        for (Player player: clubs.get(0).getPlayers()) {
             System.out.println(player.toString());
         }
         System.out.println("==============");
-        for (Player player: teams.get(1).getPlayers()) {
+        for (Player player: clubs.get(1).getPlayers()) {
             System.out.println(player.toString());
         }
         System.out.println("==============");
-        for (Player player: teams.get(2).getPlayers()) {
+        for (Player player: clubs.get(2).getPlayers()) {
             System.out.println(player.toString());
         }
         System.out.println("==============");
-        for (Player player: teams.get(3).getPlayers()) {
+        for (Player player: clubs.get(3).getPlayers()) {
             System.out.println(player.toString());
         }
     }
