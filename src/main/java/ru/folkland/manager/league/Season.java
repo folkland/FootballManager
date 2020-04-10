@@ -15,6 +15,7 @@ public class Season {
 	private SeasonSchedule shedule;
 
 	public Season(List<Club> clubs) {
+		if (clubs.size() % 2 == 1) throw new IllegalArgumentException("Count of club uneven");
 		tTable = new TournamentTable(clubs);
 		shedule = new SeasonSchedule(tTable);
 		shedule.generateSchedule();

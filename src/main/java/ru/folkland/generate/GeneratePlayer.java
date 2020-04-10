@@ -15,9 +15,7 @@ public class GeneratePlayer {
     }
 
     public static Player createPlayer(FootballPosition position) {
-        int nameLength = Constants.RANDOM.nextInt(5) + 4;
-        int surnameLength = Constants.RANDOM.nextInt(10) + 4;
         int skills = Constants.RANDOM.nextInt(25) + 10;
-        return new Player(StringGenerate.getName(nameLength), StringGenerate.getName(surnameLength), 18, skills, position);
+        return new Player(FakerGenerate.getFirstName(), FakerGenerate.getLastName(), 18, skills, position);
     }
 }

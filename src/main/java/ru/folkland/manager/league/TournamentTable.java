@@ -23,13 +23,6 @@ public class TournamentTable {
 			table.add(teamSeason);
 		}
 	}
-
-	//очищаем результаты в начале сезона
-	void clearTournament() {
-		for (TeamSeason teamSeason : table) {
-			teamSeason.clearStats();
-		}
-	}
 	
 	//сортируем клубы после каждого тура
 	void sortTable() {
@@ -55,10 +48,6 @@ public class TournamentTable {
 	
 	List<TeamSeason> getTable() {
 		return table;
-	}
-
-	void setTable(List<TeamSeason> table) {
-		this.table = table;
 	}
 
 	@Override

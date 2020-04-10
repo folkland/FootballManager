@@ -78,7 +78,7 @@ public class Match {
 	 * @return ничья или нет
 	 */
 	private boolean draw(int h, int g) {
-		return (h == g && Math.abs(h - g) < Constants.TEAM_STRENGTH_EQUALS);
+		return (h == g || Math.abs(h - g) < Constants.TEAM_STRENGTH_EQUALS);
 	}
 
 	public TeamSeason getHome() {

@@ -84,7 +84,7 @@ public class SeasonSchedule {
     /**
      * Отигрываем следующий тур
      */
-    void playNextTour() throws IllegalArgumentException {
+    void playNextTour() {
         if (pastTour == allTourCount) throw new IllegalArgumentException("Season has no more tour");
         SeasonTour seasonTour = seasonTourList.get(pastTour);
         pastTour++;

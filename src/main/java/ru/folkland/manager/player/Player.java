@@ -48,7 +48,7 @@ public class Player extends Person implements Comparable<Player> {
 	public void training(boolean isPlayInMatch) {
 		int traineMax = Constants.MAX_TRAIN_FOR_NOT_PLAYED_MATCH;
 		if (isPlayInMatch) traineMax = Constants.MAX_TRAIN_FOR_PLAYED_MATCH;
-		double growth = Constants.RANDOM.nextInt(traineMax) / 100;
+		double growth = Constants.RANDOM.nextInt(traineMax) / 100.0;
 		skill = skill + growth;
 	}
 

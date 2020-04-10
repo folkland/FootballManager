@@ -12,7 +12,7 @@ import ru.folkland.manager.transfer.TransferList;
 public class GenerateClub {
 
     public static Club createClub() {
-        return createClub(StringGenerate.getName(Constants.RANDOM.nextInt(7) + 4));
+        return createClub(FakerGenerate.clubName());
     }
 
     private static Club createClub(String name) {
@@ -36,7 +36,7 @@ public class GenerateClub {
     }
 
     public static Club createClubWithTransfer(TransferList transferList) {
-        return createClubWithTransfer(StringGenerate.getName(Constants.RANDOM.nextInt(7) + 4), transferList);
+        return createClubWithTransfer(FakerGenerate.clubName(), transferList);
     }
 
     private static Club createClubWithTransfer(String name, TransferList transferList) {
