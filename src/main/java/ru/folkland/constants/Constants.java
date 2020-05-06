@@ -4,6 +4,8 @@ import java.security.SecureRandom;
 
 public class Constants {
 
+    private Constants() {}
+
     /**
      * Randomizer constant
      */
@@ -22,4 +24,10 @@ public class Constants {
     public static int TEAM_STRENGTH_EQUALS = 50;
     public static int MAX_DRAW_SCORED_COUNT = 5; // 0-4
     public static int MAX_GAME_SCORED_COUNT = 10; //0-9
+
+    /**
+     * Budget constants
+     */
+    public static int AVERAGE_CLUB_BUDGET = 5;
+    public static int MIN_CLUB_BUDGET = 25;
 }
