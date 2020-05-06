@@ -10,7 +10,7 @@ public class TestPlayerGenerate {
 
     public static void main(String[] args) {
         for (int i = 0; i < 4; i++) {
-            System.out.println(GeneratePlayer.createPlayer(FootballPosition.midfielder).toString());
+            System.out.println(GeneratePlayer.createPlayer(FootballPosition.midfielder, null).toString());
         }
     }
 }

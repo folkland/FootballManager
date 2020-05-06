@@ -10,10 +10,11 @@ import ru.folkland.manager.transfer.TransferList;
 public class TestClubFormation {
 
     public static void main(String[] args) {
-        TransferList transferList = new TransferList(100);
+        TransferList transferList = TransferList.newTransferList(100);
         Club club = GenerateClub.createClubWithTransfer(transferList);
         System.out.println(club.toString());
-        System.out.println(club.getTotalClubStreinght());
+        System.out.println(club.getTotalClubStrength());
         System.out.println(club.getPlayers().size());
+        System.out.println(club.getBudgetOfClub() - club.getSpendedBudget());
     }
 }

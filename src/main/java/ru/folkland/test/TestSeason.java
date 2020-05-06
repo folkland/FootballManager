@@ -3,6 +3,7 @@ package ru.folkland.test;
 import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.league.Season;
 import ru.folkland.manager.player.Player;
+import ru.folkland.manager.transfer.TransferList;
 
 import java.util.List;
 
@@ -12,12 +13,12 @@ import java.util.List;
 public class TestSeason {
 
     public static void main(String[] args) {
-        List<Club> clubs = CreateClubsForTest.getClubsList(4);
+        List<Club> clubs = CreateClubsForTest.getClubsList(4, TransferList.newTransferList(100));
         Season season = new Season(clubs);
         season.playAllTours();
         System.out.println(season.showTable());
         for (Club club : clubs) {
-            System.out.println(club.getName() + " " + club.getTotalClubStreinght());
+            System.out.println(club.getName() + " " + club.getTotalClubStrength());
         }
         System.out.println("==============");
         for (Player player: clubs.get(0).getPlayers()) {
