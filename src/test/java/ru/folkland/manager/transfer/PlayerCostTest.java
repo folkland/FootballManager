@@ -12,27 +12,27 @@ public class PlayerCostTest {
     public void testCalculateTransferCost() {
         Player player = new Player("Poul", "Pogba", 21, 20, FootballPosition.midfielder);
         PlayerCost playerCost = new PlayerCost(player);
-        playerCost.calculateTransferCost();
+//        playerCost.calculateTransferCost();
         System.out.println(player.toString());
         System.out.println(playerCost.getCost());
 
 //        player.setContract(3);
-        playerCost.calculateTransferCost();
+//        playerCost.calculateTransferCost();
         System.out.println(player.toString());
         System.out.println(playerCost.getCost());
 
 //        player.setSkill(40);
-        playerCost.calculateTransferCost();
+//        playerCost.calculateTransferCost();
         System.out.println(player.toString());
         System.out.println(playerCost.getCost());
 
 //        player.setAge(25);
-        playerCost.calculateTransferCost();
+//        playerCost.calculateTransferCost();
         System.out.println(player.toString());
         System.out.println(playerCost.getCost());
 
 //        player.setAge(30);
-        playerCost.calculateTransferCost();
+//        playerCost.calculateTransferCost();
         System.out.println(player.toString());
         System.out.println(playerCost.getCost());
     }
