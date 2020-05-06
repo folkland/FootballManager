@@ -77,13 +77,13 @@ class TeamMainCast {
         Collections.sort(defenders);
         Collections.sort(midfielders);
         Collections.sort(forwards);
-        for (int i = 0; i < club.getScheme().getForward(); i++) {
+        for (int i = 0; i < club.getFScheme().getForward(); i++) {
             toMatch.add(forwards.get(i));
         }
-        for (int i = 0; i < club.getScheme().getMidfielder(); i++) {
+        for (int i = 0; i < club.getFScheme().getMidfielder(); i++) {
             toMatch.add(midfielders.get(i));
         }
-        for (int i = 0; i < club.getScheme().getDefender(); i++) {
+        for (int i = 0; i < club.getFScheme().getDefender(); i++) {
             toMatch.add(defenders.get(i));
         }
     }

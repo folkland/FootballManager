@@ -30,4 +30,8 @@ public abstract class Person {
         this.age = age;
         count++;
     }
+
+    public void leftOneYear() {
+        age++;
+    }
 }

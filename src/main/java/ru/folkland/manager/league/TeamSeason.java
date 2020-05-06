@@ -26,21 +26,13 @@ public class TeamSeason implements Comparable<TeamSeason> {
 	
 	TeamSeason(Club club) {
 		this.club = club;
-		matchCount = 0;
-		points = 0;
-		victory = 0;
-		draw = 0;
-		lose = 0;
+//		matchCount = 0;
+//		points = 0;
+//		victory = 0;
+//		draw = 0;
+//		lose = 0;
 	}
-	
-	//очитска статистики клуба в начале сезона
-	void clearStats() {
-		matchCount = 0;
-		points = 0;
-		victory = 0;
-		draw = 0;
-		lose = 0;
-	}
+
 	//результаты матчей
 	void win() {
 		matchCount++;
@@ -59,6 +51,14 @@ public class TeamSeason implements Comparable<TeamSeason> {
 	void scored(int scored, int missed) {
 		this.scored += scored;
 		this.missed += missed;
+	}
+
+	void seasonEnd(int seasonIncome) {
+		club.oneYearLeft(seasonIncome);
+	}
+
+	public void matchPlayed() {
+		club.getTotalClubStrength();
 	}
 	
 	@Override

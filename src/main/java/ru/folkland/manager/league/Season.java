@@ -1,35 +1,36 @@
 package ru.folkland.manager.league;
 
-import java.util.List;
-
+import lombok.Getter;
 import ru.folkland.manager.clubs.Club;
+
+import java.util.List;
 
 /**
  * Создаем новый сезон играем игры и сохраняем результаты
  * @author Farhutdinov
  *
  */
+@Getter
 public class Season {
 
-	private TournamentTable tTable;
-	private SeasonSchedule shedule;
+	private SeasonSchedule schedule;
 
 	public Season(List<Club> clubs) {
 		if (clubs.size() % 2 == 1) throw new IllegalArgumentException("Count of club uneven");
-		tTable = new TournamentTable(clubs);
-		shedule = new SeasonSchedule(tTable);
-		shedule.generateSchedule();
+		TournamentTable tTable = new TournamentTable(clubs);
+		schedule = new SeasonSchedule(tTable);
+		schedule.generateSchedule();
 	}
 
-	public void playNextTour() {
-		shedule.playNextTour();
+	public boolean playNextTour() {
+		return schedule.playNextTour();
 	}
 
 	public void playAllTours() {
-		shedule.playAllTour();
+		schedule.playAllTour();
 	}
 
 	public String showTable() {
-		return tTable.toString();
+		return schedule.getTTable().toString();
 	}
 }

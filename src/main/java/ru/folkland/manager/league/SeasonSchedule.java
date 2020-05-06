@@ -1,5 +1,6 @@
 package ru.folkland.manager.league;
 
+import lombok.Getter;
 import ru.folkland.manager.match.Match;
 import ru.folkland.manager.match.Total;
 
@@ -11,6 +12,7 @@ import java.util.Map;
  * Расписание матчей сезона
  * @author folkland
  */
+@Getter
 public class SeasonSchedule {
 
     private TournamentTable tTable;
@@ -84,8 +86,7 @@ public class SeasonSchedule {
     /**
      * Отигрываем следующий тур
      */
-    void playNextTour() {
-        if (pastTour == allTourCount) throw new IllegalArgumentException("Season has no more tour");
+    boolean playNextTour() {
         SeasonTour seasonTour = seasonTourList.get(pastTour);
         pastTour++;
         seasonTour.playTour();
@@ -96,12 +97,24 @@ public class SeasonSchedule {
             tTable.setPoints(match.getHome(), match.getGuest(), total.getWinner(), total.getHomeScore(), total.getGuestScore());
             tTable.sortTable();
         }
+        if (pastTour == allTourCount) {
+            seasonEnd();
+            return false;
+        }
+        return true;
     }
 
     void playAllTour() {
         for (int i = 0; i < allTourCount; i++) {
             playNextTour();
         }
+        seasonEnd();
+    }
+
+    private void seasonEnd() {
+        int seasonIncome = teamSeasons.size();
+        for (TeamSeason teamSeason: teamSeasons)
+            teamSeason.seasonEnd(seasonIncome--);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ru.folkland.manager.league;
 
+import lombok.Getter;
 import ru.folkland.manager.match.Match;
 import ru.folkland.manager.match.Total;
 
@@ -12,6 +13,7 @@ import java.util.Map;
  * Класс описывающий один тур чемпионата
  * @author folkland
  */
+@Getter
 public class SeasonTour {
 
     private List<Match> matches;
@@ -35,14 +37,6 @@ public class SeasonTour {
 
     private void playMatch(Match match) {
         tourResults.put(match, match.playMatch());
-    }
-
-    Map<Match, Total> getTourResults() {
-        return tourResults;
-    }
-
-    List<Match> getMatches() {
-        return matches;
     }
 
     @Override

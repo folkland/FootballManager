@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lombok.Getter;
 import ru.folkland.manager.clubs.Club;
 import ru.folkland.manager.match.Winner;
 
@@ -12,6 +13,7 @@ import ru.folkland.manager.match.Winner;
  * @author Farhutdinov
  *
  */
+@Getter
 public class TournamentTable {
 
 	private List<TeamSeason> table;

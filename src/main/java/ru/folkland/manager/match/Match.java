@@ -1,8 +1,10 @@
 package ru.folkland.manager.match;
 
+import lombok.Getter;
 import ru.folkland.manager.league.TeamSeason;
 import ru.folkland.constants.Constants;
 
+@Getter
 public class Match {
 
 	private TeamSeason home;
@@ -28,6 +30,8 @@ public class Match {
 		Total total = totalScore();
 		homeSquad.training();
 		guestSquad.training();
+		home.matchPlayed();
+		guest.matchPlayed();
 		return total;
 	}
 
@@ -79,14 +83,6 @@ public class Match {
 	 */
 	private boolean draw(int h, int g) {
 		return (h == g || Math.abs(h - g) < Constants.TEAM_STRENGTH_EQUALS);
-	}
-
-	public TeamSeason getHome() {
-		return home;
-	}
-
-	public TeamSeason getGuest() {
-		return guest;
 	}
 
 	@Override
