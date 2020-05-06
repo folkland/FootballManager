@@ -7,11 +7,10 @@ import ru.folkland.manager.transfer.TransferList;
 import java.util.ArrayList;
 import java.util.List;
 
-class CreateClubsForTest {
+public class CreateClubsForTest {
 
-    static List<Club> getClubsList(int clubCount) {
+    public static List<Club> getClubsList(int clubCount, TransferList transferList) {
         List<Club> clubs = new ArrayList<>();
-        TransferList transferList = new TransferList(100);
         while (clubs.size() < clubCount)
             clubs.add(GenerateClub.createClubWithTransfer(transferList));
         return clubs;
