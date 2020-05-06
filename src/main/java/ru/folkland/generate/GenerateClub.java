@@ -11,32 +11,32 @@ import ru.folkland.manager.transfer.TransferList;
  */
 public class GenerateClub {
 
-    public static Club createClub() {
-        return createClub(FakerGenerate.clubName());
+    public static Club createClub(SpringNameGenerate nameGenerate) {
+        return createClub(nameGenerate.clubName(), nameGenerate);
     }
 
-    private static Club createClub(String name) {
+    private static Club createClub(String name, SpringNameGenerate nameGenerate) {
         FootballScheme scheme = FootballScheme.values()[Constants.RANDOM.nextInt(FootballScheme.values().length)];
-        return createClub(name, scheme);
+        return createClub(name, scheme, nameGenerate);
     }
 
-    private static Club createClub(String name, FootballScheme scheme) {
+    private static Club createClub(String name, FootballScheme scheme, SpringNameGenerate nameGenerate) {
         Club club = new Club(name, scheme);
-        club.addPlayer(GeneratePlayer.createPlayer(FootballPosition.goalkeeper));
-        for (int i = 0; i < club.getScheme().getDefender(); i++) {
-            club.addPlayer(GeneratePlayer.createPlayer(FootballPosition.defender));
+        club.addPlayer(GeneratePlayer.createPlayer(FootballPosition.goalkeeper, nameGenerate));
+        for (int i = 0; i < club.getFScheme().getDefender(); i++) {
+            club.addPlayer(GeneratePlayer.createPlayer(FootballPosition.defender, nameGenerate));
         }
-        for (int i = 0; i < club.getScheme().getMidfielder(); i++) {
-            club.addPlayer(GeneratePlayer.createPlayer(FootballPosition.midfielder));
+        for (int i = 0; i < club.getFScheme().getMidfielder(); i++) {
+            club.addPlayer(GeneratePlayer.createPlayer(FootballPosition.midfielder, nameGenerate));
         }
-        for (int i = 0; i < club.getScheme().getForward(); i++) {
-            club.addPlayer(GeneratePlayer.createPlayer(FootballPosition.forward));
+        for (int i = 0; i < club.getFScheme().getForward(); i++) {
+            club.addPlayer(GeneratePlayer.createPlayer(FootballPosition.forward, nameGenerate));
         }
         return club;
     }
 
     public static Club createClubWithTransfer(TransferList transferList) {
-        return createClubWithTransfer(FakerGenerate.clubName(), transferList);
+        return createClubWithTransfer(transferList.getNameGenerate().clubName(), transferList);
     }
 
     private static Club createClubWithTransfer(String name, TransferList transferList) {
@@ -46,7 +46,7 @@ public class GenerateClub {
 
     private static Club createClubWithTransfer(String name, FootballScheme scheme, TransferList transferList) {
         Club club = new Club(name, scheme);
-        club.compositionFormation(transferList);
+        club.firstCompositionFormation(transferList);
         return club;
     }
 }
