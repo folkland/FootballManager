@@ -9,14 +9,9 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * @author folkland
  */
 @SpringBootApplication
-public class SpringBootApplicationFootbal extends SpringBootServletInitializer {
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(SpringBootApplicationFootbal.class);
-    }
+public class SpringBootApplicationFootball {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootApplicationFootbal.class, args);
+        SpringApplication.run(SpringBootApplicationFootball.class, args);
     }
 }
